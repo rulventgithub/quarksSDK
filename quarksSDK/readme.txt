@@ -43,3 +43,6 @@ FUNFACT this documentation was created in quarksSDK. Created a text tool using g
 I hope you enjoy the product
 rulvent [2020] 
 LINES OF CODE: 1,531
+
+fixed: 
+[FATAL] bug with the textbox limiter
