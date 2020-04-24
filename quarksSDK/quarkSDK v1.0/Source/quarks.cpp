@@ -112,7 +112,7 @@ void QuarksSDK::Movement::addMovement(RectangleShape& obj, float speed)
 	}
 
 
-		
+
 
 
 
@@ -198,7 +198,7 @@ void QuarksSDK::Movement::addMovement(RectangleShape& obj, float speed)
 	obj.setPosition(obj.getPosition().x + getPosition.x, obj.getPosition().y + getPosition.y);
 	getPosition.x = 0; getPosition.y = 0;
 }
-void QuarksSDK::Movement::SmoothMovement(RectangleShape& obj, float speed, float drag, float maxVelocity, float mutiplier  )
+void QuarksSDK::Movement::SmoothMovement(RectangleShape& obj, float speed, float drag, float maxVelocity, float mutiplier)
 {
 	useDeltaTime();
 	getPosition.x = 0; getPosition.y = 0;
@@ -220,7 +220,7 @@ void QuarksSDK::Movement::SmoothMovement(RectangleShape& obj, float speed, float
 		}
 	}
 	if (!noDownUse) {
-	
+
 		if (Keyboard::isKeyPressed(Keyboard::S))
 		{
 			getPosition.y = 1.f;
@@ -255,7 +255,7 @@ void QuarksSDK::Movement::SmoothMovement(RectangleShape& obj, float speed, float
 			if (currentVelocity.x > -maxVelocity)
 				currentVelocity.x += speed * getPosition.x * deltaTime * mutiplier;
 		}
-	
+
 	}
 
 
@@ -279,11 +279,11 @@ void QuarksSDK::Movement::SmoothMovement(RectangleShape& obj, float speed, float
 		}
 
 	}
-		
-	
-	
-	
- 
+
+
+
+
+
 
 
 
@@ -408,7 +408,7 @@ void QuarksSDK::Collision::PCollision(RectangleShape& _Give, RectangleShape& _Ob
 {
 	FloatRect playerbounds = _Give.getGlobalBounds();
 	FloatRect wallbounds = _Obtain.getGlobalBounds();
-	 
+
 	nextpos = playerbounds;
 	nextpos.left += getPosition.x;
 	nextpos.top += getPosition.y;
@@ -800,7 +800,7 @@ void guiQuarks::Dialog::createDialog(string font, string Text, int _tSize, Vecto
 	button.setPosition(positions);
 	button.setSize(size);
 	button.setOrigin(Vector2f(button.getGlobalBounds().width / 2, button.getGlobalBounds().height / 2));
-	
+
 
 
 	this->font.loadFromFile(font);
@@ -832,9 +832,9 @@ bool guiQuarks::Dialog::useDialog(CreateWindow windowContext, float duration)
 	}
 
 }
-void guiQuarks::TextBox::createTextBox(string font,bool useLineSpace, int charSize, Color color ,bool useLimit, int textLimit, Vector2f pos)
+void guiQuarks::TextBox::createTextBox(string font, bool useLineSpace, int charSize, Color color, bool useLimit, int textLimit, Vector2f pos)
 {
- 	 
+
 	this->useLineSpace = useLineSpace;
 
 	this->font.loadFromFile(font);
@@ -845,55 +845,56 @@ void guiQuarks::TextBox::createTextBox(string font,bool useLineSpace, int charSi
 		pos
 
 	);
-	LimitActive == useLimit;
+	LimitActive = useLimit;
 	this->limit = textLimit;
 
 }
 void guiQuarks::TextBox::inputLogic(int charTyped)
-{
+{	 
 	if (charTyped != deleteKey && charTyped != enterKey) {
-	
-			ttext << static_cast<char>(charTyped);
-		
-	} else if (charTyped == deleteKey) {
+
+		ttext << static_cast<char>(charTyped);
+
+	}
+	else if (charTyped == deleteKey) {
 
 		if (ttext.str().length() != 0) {
-		deleteLastCharacter();
-	}
+			deleteLastCharacter();
+		}
 	}
 	else if (charTyped == 13 && useLineSpace) {
- 
+
 		std::string t = ttext.str();
 		std::string newT = "\n";
-	 
-		
+
+
 		ttext << newT;
-		
+
 	}
 	text.setString(ttext.str() + cursor);
 }
 void guiQuarks::TextBox::deleteLastCharacter()
 {
 	std::string t = ttext.str();
-	std::string newT = "" ;
+	std::string newT = "";
 	for (int i = 0; i < t.length() - 1; i++) {
 		newT += t[i];
 	}
 	ttext.str("");
 	ttext << newT;
-	text.setString(ttext.str() + cursor );
+	text.setString(ttext.str() + cursor);
 }
 QuarksAnimator::BlockAnimation::BlockAnimation(RectangleShape& _Obj)
 {
 	ptemp = _Obj.getPosition();
 	stemp = _Obj.getSize();
 }
-bool QuarksAnimator::BlockAnimation::changePosupdate(float dur , RectangleShape& _Obj, float incrementBy, Vector2f endPos)
+bool QuarksAnimator::BlockAnimation::changePosupdate(float dur, RectangleShape& _Obj, float incrementBy, Vector2f endPos)
 {
 	if (clock.getElapsedTime().asSeconds() > dur) {
-		
+
 		if (_Obj.getPosition() == endPos)
-		{ 
+		{
 			_Obj.setPosition(ptemp);
 			return true;
 		}
@@ -902,17 +903,17 @@ bool QuarksAnimator::BlockAnimation::changePosupdate(float dur , RectangleShape&
 				_Obj.move(QuarksSDK::Normilize(Vector2f(_Obj.getPosition().x + incrementBy, _Obj.getPosition().y)));
 			}
 			if (endPos.y != 0) {
-				_Obj.move(QuarksSDK::Normilize(Vector2f(_Obj.getPosition().x, _Obj.getPosition().y+ incrementBy)));
+				_Obj.move(QuarksSDK::Normilize(Vector2f(_Obj.getPosition().x, _Obj.getPosition().y + incrementBy)));
 			}
 		}
 		clock.restart();
 	}
 	return false;
-	
+
 }
 bool QuarksAnimator::BlockAnimation::subPosupdate(float dur, RectangleShape& _Obj, float incrementBy, Vector2f endPos)
 {
- 	if (clock.getElapsedTime().asSeconds() > dur) {
+	if (clock.getElapsedTime().asSeconds() > dur) {
 
 		if (_Obj.getPosition() == endPos)
 		{
@@ -924,7 +925,7 @@ bool QuarksAnimator::BlockAnimation::subPosupdate(float dur, RectangleShape& _Ob
 				_Obj.move(QuarksSDK::Normilize(Vector2f(_Obj.getPosition().x - incrementBy, _Obj.getPosition().y)));
 			}
 			if (endPos.y != 0) {
-				_Obj.move(QuarksSDK::Normilize(Vector2f(_Obj.getPosition().x, _Obj.getPosition().y- incrementBy)));
+				_Obj.move(QuarksSDK::Normilize(Vector2f(_Obj.getPosition().x, _Obj.getPosition().y - incrementBy)));
 			}
 		}
 		clock.restart();
@@ -939,7 +940,7 @@ void QuarksAnimator::BlockAnimation::changeSizeUpdate(float dur, RectangleShape&
 		if (_Obj.getSize() == ptemp)
 		{
 			_Obj.setSize(ptemp);
- 		}
+		}
 		else {
 			if (_Obj.getSize().x != size.x) {
 				_Obj.setSize(Vector2f(_Obj.getSize().x + incrementBy, _Obj.getSize().y));
